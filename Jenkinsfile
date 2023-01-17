@@ -1,30 +1,23 @@
-pipeline{
-
-      agent {
-                docker {
-                image 'maven'
-                args '-v $HOME/.m2:/root/.m2'
-                }
-             }
-         
-        stages{
-
-              stage('Quality Gate Status Check'){
-                  steps{
-                      script{
-			      withSonarQubeEnv('sonarserver') { 
-			      sh "mvn sonar:sonar"
-                       	     	}
-			      timeout(time: 1, unit: 'HOURS') {
-			      def qg = waitForQualityGate()
-				      if (qg.status != 'OK') {
-					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
-				      }
-                    		}
-		    	    sh "mvn clean install"
-		  
-                 	}
-               	 }  
-              }    
+pipeline {
+    agent {
+        docker {
+            image 'maven:3.6.3-jdk-11'
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
+    }
+
+    stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/ejemplo/repo.git'
+            }
+        }
+        stage('Build and SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'mvn clean install sonar:sonar'
+                }
+            }
+        }
+    }
 }
