@@ -6,10 +6,7 @@ pipeline{
                 args '-v $HOME/.m2:/root/.m2'
                 }
              }
-      environment {
-          Docker_tag = getDockerTag()
-      }
-        
+         
         stages{
 
               stage('Quality Gate Status Check'){
@@ -28,12 +25,6 @@ pipeline{
 		  
                  	}
                	 }  
-              }	
-
-              
-                
-			     
-		     
-             
+              }    
         }
 }
