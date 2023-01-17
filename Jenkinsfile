@@ -1,21 +1,18 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.6.3-jdk-11'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     stages {
-        stage('Clone') {
+        stage('Build') {
             steps {
-                git 'https://github.com/ejemplo/repo.git'
+                sh 'mvn clean install'
             }
         }
-        stage('Build and SonarQube Analysis') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn clean install sonar:sonar'
+                script {
+                    withSonarQubeEnv('SonarQube') {
+                        sh 'mvn sonar:sonar'
+                    }
                 }
             }
         }
