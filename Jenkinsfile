@@ -1,13 +1,13 @@
 pipeline{
 
 agent any
-	
+	environment {
+			scannerHome = tool 'SonarQubeScanner'
+		    	} 
         stages {
 
               stage('Quality Gate Status Check'){
-		      environment {
-			scannerHome = tool 'SonarQubeScanner'
-		    	} 
+		   
 		      
 		      steps {
 			withSonarQubeEnv('sonarserver') {
