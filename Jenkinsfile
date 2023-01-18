@@ -1,9 +1,7 @@
 pipeline{
 
 agent any
-	environment {
-			scannerHome = tool 'SonarQubeScanner'
-		    	} 
+	
         stages {
 
               stage('Quality Gate Status Check'){
