@@ -2,12 +2,14 @@ pipeline{
 
 agent any
 	
-        
+        stages {
 
               stage('Quality Gate Status Check'){
-                  environment {
+		      environment {
 			scannerHome = tool 'SonarQubeScanner'
-		    	}    steps {
+		    	} 
+		      
+		      steps {
 			withSonarQubeEnv('sonarqube') {
 			    bat "${scannerHome}/bin/sonar-scanner"
 			}        timeout(time: 10, unit: 'MINUTES') {
@@ -15,5 +17,5 @@ agent any
 			}
 		    }
               }	
-
+	}
 }
