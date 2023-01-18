@@ -10,7 +10,7 @@ agent any
 		    	} 
 		      
 		      steps {
-			withSonarQubeEnv('sonarqube') {
+			withSonarQubeEnv('sonarserver') {
 			    bat "${scannerHome}/bin/sonar-scanner"
 			}        timeout(time: 10, unit: 'MINUTES') {
 			    waitForQualityGate abortPipeline: true
