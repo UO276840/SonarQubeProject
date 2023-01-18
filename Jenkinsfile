@@ -2,7 +2,7 @@ pipeline{
 
 agent any
 	
-        stages{
+        
 
               stage('Quality Gate Status Check'){
                   environment {
@@ -16,10 +16,4 @@ agent any
 		    }
               }	
 
-
-
-
-
-
-        }
 }
