@@ -2,6 +2,7 @@ pipeline{
 
 
         stages{
+		agent any
 
               stage('Quality Gate Status Check'){
                   steps{
