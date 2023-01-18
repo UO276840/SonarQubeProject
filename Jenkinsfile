@@ -6,9 +6,6 @@ pipeline{
                 args '-v $HOME/.m2:/root/.m2'
                 }
              }
-      environment {
-          Docker_tag = getDockerTag()
-      }
 
         stages{
 
@@ -16,7 +13,7 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('sonarserver') { 
-			      sh "mvn sonar:sonar"
+			      bat "mvn sonar:sonar"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
@@ -24,7 +21,7 @@ pipeline{
 					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
 				      }
                     		}
-		    	    sh "mvn clean install"
+		    	    bat "mvn clean install"
 
                  	}
                	 }  
