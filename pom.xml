@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.yourcompany</groupId>
-    <artifactId>your-project-name</artifactId>
+    <artifactId>SonarQubeProject</artifactId>
     <version>1.0</version>
 
     <dependencies>
