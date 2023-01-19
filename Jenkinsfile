@@ -8,7 +8,7 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('sonarserver') { 
-			      bat "cd SonarQubeProject"
+			      
 			      bat "mvn sonar:sonar"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
