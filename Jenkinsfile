@@ -7,7 +7,7 @@ pipeline{
               stage('Quality Gate Status Check'){
                   steps{
                       script{
-			      def scannerHome = tool 'SonarScanner 4.0';
+			      def scannerHome = tool name: 'sonar_scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
 			      withSonarQubeEnv('sonarserver') { 
 			      
 			      	bat "${scannerHome}/bin/sonar-scanner"
