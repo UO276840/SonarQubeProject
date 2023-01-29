@@ -12,7 +12,7 @@ pipeline{
 			      
 			      	bat "${scannerHome}/bin/sonar-scanner.bat -Dsonar.projectKey=develop"
                        	     	}
-			      timeout(time: 1, unit: 'HOURS')
+			     
 			      
                  	}
                	 }  
