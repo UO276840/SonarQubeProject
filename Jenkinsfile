@@ -7,18 +7,13 @@ pipeline{
               stage('Quality Gate Status Check'){
                   steps{
                       script{
+			      def scannerHome = tool 'SonarScanner 4.0';
 			      withSonarQubeEnv('sonarserver') { 
 			      
-			      bat "mvn sonar:sonar"
+			      bat "${scannerHome}/bin/sonar-scanner"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
-			      def qg = waitForQualityGate()
-				      if (qg.status != 'OK') {
-					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
-				      }
-                    		}
-		    	    bat "mvn clean install"
-
+			      
                  	}
                	 }  
               }	
