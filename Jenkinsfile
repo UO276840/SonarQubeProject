@@ -9,7 +9,7 @@ pipeline{
                       script{
 			      withSonarQubeEnv('sonarserver') { 
 			      
-			      	bat "./gradlew sonarqube"
+			      	bat "gradlew.bat sonarqube"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS')
 			      
