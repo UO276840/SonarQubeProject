@@ -7,9 +7,10 @@ pipeline{
               stage('Quality Gate Status Check'){
                   steps{
                       script{
+			      def scannerHome = tool 'sonarqube';
 			      withSonarQubeEnv('sonarserver') { 
 			      
-			      	bat "gradle sonarqube"
+			      	bat "${tool("sonarqube")}/bin/sonar-scanner"
                        	     	}
 			      timeout(time: 1, unit: 'HOURS')
 			      
